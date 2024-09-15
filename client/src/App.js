@@ -1,10 +1,10 @@
 import './App.css';
-import GigPool from "./pages/gigPool/GigPool";
+import GigTracker from "./pages/gigTracker/GigTracker";
 
 function App() {
   return (
     <div className="App">
-      <GigPool />
+      <GigTracker />
     </div>
   );
 }
