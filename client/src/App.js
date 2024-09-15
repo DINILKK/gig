@@ -1,10 +1,10 @@
 import './App.css';
-import GigJournal from "./pages/gigJournal/GigJournal";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
   return (
     <div className="App">
-      <GigJournal />
+      <HomePage />
     </div>
   );
 }
