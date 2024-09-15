@@ -1,10 +1,10 @@
 import './App.css';
-import GigTracker from "./pages/gigTracker/GigTracker";
+import GigJournal from "./pages/gigJournal/GigJournal";
 
 function App() {
   return (
     <div className="App">
-      <GigTracker />
+      <GigJournal />
     </div>
   );
 }
