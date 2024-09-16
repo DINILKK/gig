@@ -1,10 +1,10 @@
 import './App.css';
-import LoginPage from "./pages/gigLogin/LoginPage"
+import SignInPage from "./pages/SignUpPage/CreateAccount"
 
 function App() {
   return (
     <div className="App">
-      <LoginPage />
+      <SignInPage />
     </div>
   );
 }
