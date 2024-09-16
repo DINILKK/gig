@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function EmailSignUp() {
+function EmailSignup() {
   const [role, setRole] = useState("");
 
   const handleRoleChange = (e) => {
@@ -56,4 +56,4 @@ function EmailSignUp() {
   );
 }
 
-export default EmailSignUp;
+export default EmailSignup;
