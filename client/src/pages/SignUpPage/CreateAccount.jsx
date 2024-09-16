@@ -1,6 +1,6 @@
 import React from "react";
 import SocialSignUp from "./SocialSignUp";
-import EmailSignUp from "./EmailSignup";
+import EmailSignUp from "./EmailSignUp";
 import OrDivider from "./OrDivider";
 import TermsAgreement from "./TermsAgreement";
 
