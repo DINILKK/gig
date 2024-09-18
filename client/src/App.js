@@ -9,7 +9,7 @@ import GigTracker from "./pages/gigTracker/GigTracker"
 function App() {
   return (
     <div className="App">
-      <SignInPage />
+      <GigJournal/>
     </div>
   );
 }

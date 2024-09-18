@@ -3,7 +3,7 @@ import { FaUserCircle } from 'react-icons/fa'; // Import Font Awesome user icon
 
 const Header = () => {
   return (
-    <header className="bg-gray-800 border-b border-gray-700 w-full fixed top-0 left-0 shadow-lg z-50">
+    <header className="bg-gray-800 border-b border-gray-700 w-full fixed top-0 left-0 shadow-lg z-40">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <nav className="flex flex-wrap items-center justify-between h-auto lg:h-20 py-4">
           <div className="flex-shrink-0 flex items-center">

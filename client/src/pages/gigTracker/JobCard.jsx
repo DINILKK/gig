@@ -1,7 +1,20 @@
-import React from 'react';
+import React,{useState} from 'react';
+import JobDetailsCardDisplay from '../../components/DetailCard/JobDetailCardDisplay';
 
-function JobCard({ title, location ,company}) {
+function JobCard({ title, company, location,pay,shift,time,role,description }) {
+  const [isOpen, setIsOpen] = useState(false); 
+
+  // Open the job details modal
+  const openDetails = () => {
+    setIsOpen(true);
+  };
+
+  // Close the job details modal
+  const closeDetails = () => {
+    setIsOpen(false);
+  };
   return (
+    <>
     <div className="flex flex-col w-auto max-md:mt-10">
       <div className="py-5 px-6 bg-white border border-pink-800 rounded-2xl shadow-md">
         <div className="flex gap-5 items-center max-md:flex-col">
@@ -22,6 +35,7 @@ function JobCard({ title, location ,company}) {
                 <button
                   className="mt-4 text-base text-blue-600 hover:underline"
                   aria-label={`See more details about ${title} at ${company}`}
+                  onClick={openDetails}
                 >
                   See more...
                 </button>
@@ -44,6 +58,23 @@ function JobCard({ title, location ,company}) {
         </div>
       </div>
     </div>
+    {/* JobDetailsCard component for showing the gig details */}
+    {isOpen && (
+      <JobDetailsCardDisplay
+        job={{
+          title: title,
+          role : role,
+          location: location, // or any other field you want
+          salary: pay,
+          shift : shift,
+          time:time,
+          contact: 'contact@company.com',
+          description : description // Add actual contact info
+        }}
+        onClose={closeDetails}
+      />
+    )}
+    </>
   );
 }
 
