@@ -27,7 +27,7 @@ router.get('/details', async (req, res) => {
         });
     } catch (error) {
         console.error('Error fetching job details:', error);
-        res.status(500).json({ message: 'Failed to retrieve job details' });
+        return res.status(500).json({ message: 'Failed to retrieve job details' });
     }
 });
 
@@ -46,14 +46,14 @@ router.get('/search', async (req, res) => {
             ]
         }).exec();
 
-        if (jobs.length === 0) {
-            return res.status(404).json({ message: 'No jobs found matching your search.' });
-        }
+        // if (jobs.length === 0) {
+        //     return res.status(404).json({ message: 'No jobs found matching your search.' });
+        // }
 
         res.json({ jobs }); // Return search results
     } catch (error) {
         console.error('Error searching jobs:', error);
-        res.status(500).json({ message: 'Failed to search for jobs' });
+        return res.status(500).json({ message: 'Failed to search for jobs' });
     }
 });
 
@@ -69,14 +69,14 @@ router.get('/topCategories', async (req, res) => {
         // Fetch jobs matching the selected category
         const jobs = await JobCollection.find({ type: { $regex: selectedCategory, $options: 'i' } }).exec();
 
-        if (jobs.length === 0) {
-            return res.status(404).json({ message: 'No jobs found in this category.' });
-        }
+        // if (jobs.length === 0) {
+        //     return res.status(404).json({ message: 'No jobs found in this category.' });
+        // }
 
-        res.json({ jobs }); // Return category-filtered jobs
+        res.json({ jobs }); 
     } catch (error) {
         console.error('Error fetching jobs by category:', error);
-        res.status(500).json({ message: 'Failed to retrieve jobs for this category' });
+        return res.status(500).json({ message: 'Failed to retrieve jobs for this category' });
     }
 });
 

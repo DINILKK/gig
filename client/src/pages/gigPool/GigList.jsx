@@ -8,7 +8,7 @@ const GigList = ({ selectedCategory, searchTerm, setSearchTerm, resetSelectedCat
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Display jobs
+  // Fetch gigs
   const fetchGigs = async () => {
     setLoading(true);
     setError(null);
@@ -40,7 +40,7 @@ const GigList = ({ selectedCategory, searchTerm, setSearchTerm, resetSelectedCat
     }
   };
 
-  // Filter logic
+  // Category filter logic
   const fetchCategories = async () => {
     if (selectedCategory) {
       try {
@@ -85,12 +85,12 @@ const GigList = ({ selectedCategory, searchTerm, setSearchTerm, resetSelectedCat
   }
 
   return (
-    <section className="flex flex-col ml-5 w-[100%] max-md:ml-0 max-md:w-full">
-      <div className="flex overflow-hidden flex-wrap grow gap-12 items-center leading-tight text-black min-h-[652px] border-l-10 max-md:mt-10 max-md:max-w-full">
+    <section className="flex flex-col w-full max-md:mt-0">
+      <div className="flex flex-wrap gap-4 items-start justify-center leading-tight text-black min-h-[652px] max-md:mt-10">
         {filteredGigs.length > 0 ? (
           filteredGigs.map((gig) => <GigCard key={gig._id} {...gig} />)
         ) : (
-          <p>No gigs available for this category.</p>
+          <p>No gigs available...</p>
         )}
       </div>
     </section>
