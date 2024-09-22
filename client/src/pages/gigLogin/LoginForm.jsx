@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function LoginForm() {
   return (
@@ -26,7 +27,7 @@ function LoginForm() {
         </div>
       </div>
       <a href="#" className="self-center mt-2 text-zinc-100 hover:opacity-80">Arr! Forgot Yer Secret Code?</a>
-      <a href="#" className="self-center mt-2 text-zinc-100 hover:opacity-80">Need Sign In?</a>
+      <Link to={'/signin'} className="self-center mt-2 text-zinc-100 hover:opacity-80">Need Sign In?</Link>
       <button type="submit" className="self-center mt-4 p-3.5 bg-green-600 rounded-lg text-base font-bold leading-relaxed text-center text-white whitespace-nowrap w-[130px] hover:opacity-80">
         Login
       </button>

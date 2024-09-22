@@ -7,13 +7,19 @@ const GigList = ({ selectedCategory, searchTerm, setSearchTerm, resetSelectedCat
   const [filteredGigs, setFilteredGigs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
+  // Pagination states
+  const [currentPage, setCurrentPage] = useState(1);
+  const [gigsPerPage] = useState(10); // You can adjust the number of items per page
 
-  // Fetch gigs
+  // Fetch gigs with pagination
   const fetchGigs = async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get('/api/details');
+      const response = await axios.get('/api/details', {
+        params: { page: currentPage, limit: gigsPerPage },
+      });
       setGigs(response.data.jobs);
       setFilteredGigs(response.data.jobs); 
     } catch (err) {
@@ -28,7 +34,9 @@ const GigList = ({ selectedCategory, searchTerm, setSearchTerm, resetSelectedCat
   const fetchSearch = async () => {
     if (searchTerm) {
       try {
-        const response = await axios.get('/api/search', { params: { searchTerm } });
+        const response = await axios.get('/api/search', { 
+          params: { searchTerm, page: currentPage, limit: gigsPerPage } 
+        });
         setGigs(response.data.jobs);
         setFilteredGigs(response.data.jobs);
         setSearchTerm(''); // Reset searchTerm after fetching results
@@ -44,7 +52,9 @@ const GigList = ({ selectedCategory, searchTerm, setSearchTerm, resetSelectedCat
   const fetchCategories = async () => {
     if (selectedCategory) {
       try {
-        const response = await axios.get('/api/topCategories', { params: { selectedCategory } });
+        const response = await axios.get('/api/topCategories', {
+          params: { selectedCategory, page: currentPage, limit: gigsPerPage },
+        });
         setGigs(response.data.jobs);
         setFilteredGigs(response.data.jobs);
         resetSelectedCategory(); // Reset selected category after fetching results
@@ -56,7 +66,7 @@ const GigList = ({ selectedCategory, searchTerm, setSearchTerm, resetSelectedCat
 
   useEffect(() => {
     fetchGigs(); 
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     fetchSearch(); 
@@ -65,6 +75,11 @@ const GigList = ({ selectedCategory, searchTerm, setSearchTerm, resetSelectedCat
   useEffect(() => {
     fetchCategories();
   }, [selectedCategory]);
+
+  // Pagination handler
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   if (loading) {
     return <p>Loading gigs...</p>;
@@ -84,6 +99,9 @@ const GigList = ({ selectedCategory, searchTerm, setSearchTerm, resetSelectedCat
     );
   }
 
+  // Get the total number of pages based on the number of gigs
+  const totalPages = Math.ceil(gigs.length / gigsPerPage);
+
   return (
     <section className="flex flex-col w-full max-md:mt-0">
       <div className="flex flex-wrap gap-4 items-start justify-center leading-tight text-black min-h-[652px] max-md:mt-10">
@@ -92,6 +110,18 @@ const GigList = ({ selectedCategory, searchTerm, setSearchTerm, resetSelectedCat
         ) : (
           <p>No gigs available...</p>
         )}
+      </div>
+      {/* Pagination Controls */}
+      <div className="flex justify-center mt-4">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={`mx-2 px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-teal-800 text-white' : 'bg-gray-300'}`}
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </section>
   );

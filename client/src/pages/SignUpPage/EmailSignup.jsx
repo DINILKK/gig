@@ -19,7 +19,7 @@ function EmailSignUp() {
             placeholder="Enter your email"
           />
         </div>
-        <div className="flex gap-1 items-center mt-1 w-full bg-gray-800 rounded border border-solid border-slate-600 min-h-[56px]">
+        {/* <div className="flex gap-1 items-center mt-1 w-full bg-gray-800 rounded border border-solid border-slate-600 min-h-[56px]">
           <label htmlFor="password" className="sr-only">Create your password</label>
           <input
             id="password"
@@ -27,7 +27,7 @@ function EmailSignUp() {
             className="flex-1 shrink gap-2 self-stretch px-1 my-auto w-full min-w-[240px] bg-transparent text-white h-[56px] px-4"
             placeholder="Create your password"
           />
-        </div>
+        </div> */}
         {/* Role Selection */}
         <div className="flex gap-1 items-center mt-2 w-full bg-gray-800 rounded border border-solid border-slate-600 min-h-[56px]">
           <label htmlFor="role" className="sr-only">Select your role</label>

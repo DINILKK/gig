@@ -31,9 +31,15 @@ router.get('/details', async (req, res) => {
     }
 });
 
-// Handle search request
+// Handle search request with pagination
 router.get('/search', async (req, res) => {
     const searchTerm = req.query.searchTerm || ''; // Search term from query
+    const { page = 1, limit = 10 } = req.query; // Default to page 1 and limit to 10
+    const options = {
+        page: parseInt(page),
+        limit: parseInt(limit),
+    };
+
     try {
         // Perform search with regex matching in multiple fields
         const jobs = await JobCollection.find({
@@ -44,36 +50,61 @@ router.get('/search', async (req, res) => {
                 { description: { $regex: searchTerm, $options: 'i' } }, // Case-insensitive search in description
                 { type: { $regex: searchTerm, $options: 'i' } }, // Case-insensitive search in type
             ]
-        }).exec();
+        })
+        .skip((options.page - 1) * options.limit)
+        .limit(options.limit)
+        .exec();
 
-        // if (jobs.length === 0) {
-        //     return res.status(404).json({ message: 'No jobs found matching your search.' });
-        // }
+        const totalJobs = await JobCollection.countDocuments({
+            $or: [
+                { title: { $regex: searchTerm, $options: 'i' } },
+                { company: { $regex: searchTerm, $options: 'i' } },
+                { role: { $regex: searchTerm, $options: 'i' } },
+                { description: { $regex: searchTerm, $options: 'i' } },
+                { type: { $regex: searchTerm, $options: 'i' } },
+            ]
+        });
 
-        res.json({ jobs }); // Return search results
+        res.json({
+            totalJobs,
+            totalPages: Math.ceil(totalJobs / options.limit),
+            currentPage: options.page,
+            jobs, // Return search results
+        });
     } catch (error) {
         console.error('Error searching jobs:', error);
         return res.status(500).json({ message: 'Failed to search for jobs' });
     }
 });
 
-// Handle category-based filtering
+// Handle category-based filtering with pagination
 router.get('/topCategories', async (req, res) => {
     const selectedCategory = req.query.selectedCategory || ''; // Category from query
+    const { page = 1, limit = 10 } = req.query; // Default to page 1 and limit to 10
+    const options = {
+        page: parseInt(page),
+        limit: parseInt(limit),
+    };
 
     try {
         if (!selectedCategory) {
             return res.status(400).json({ message: 'Category is required.' });
         }
 
-        // Fetch jobs matching the selected category
-        const jobs = await JobCollection.find({ type: { $regex: selectedCategory, $options: 'i' } }).exec();
+        // Fetch jobs matching the selected category with pagination
+        const jobs = await JobCollection.find({ type: { $regex: selectedCategory, $options: 'i' } })
+            .skip((options.page - 1) * options.limit)
+            .limit(options.limit)
+            .exec();
 
-        // if (jobs.length === 0) {
-        //     return res.status(404).json({ message: 'No jobs found in this category.' });
-        // }
+        const totalJobs = await JobCollection.countDocuments({ type: { $regex: selectedCategory, $options: 'i' } });
 
-        res.json({ jobs }); 
+        res.json({
+            totalJobs,
+            totalPages: Math.ceil(totalJobs / options.limit),
+            currentPage: options.page,
+            jobs, // Return jobs filtered by category
+        });
     } catch (error) {
         console.error('Error fetching jobs by category:', error);
         return res.status(500).json({ message: 'Failed to retrieve jobs for this category' });
