@@ -9,6 +9,7 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
+        mongoose.connection.useDb('gig')
         console.log('MongoDB connected');
     } catch (error) {
         console.error('MongoDB connection error:', error);
