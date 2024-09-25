@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
-import JobDetailsCardDisplay from '../../components/DetailCard/JobDetailCardDisplay';
+import JobDetailsCardDisplay from '../../../components/DetailCard/JobDetailCardDisplay';
 
-function JobCard({ title, company, location,pay,shift,time,role,description }) {
+
+function ApprovedJobCard({ title, company, location,pay,shift,time,role,description }) {
   const [isOpen, setIsOpen] = useState(false); 
 
   // Open the job details modal
@@ -15,8 +16,9 @@ function JobCard({ title, company, location,pay,shift,time,role,description }) {
   };
   return (
     <>
+    
     <div className="flex flex-col w-auto max-md:mt-10">
-      <div className="py-5 px-6 bg-white border border-pink-800 rounded-2xl shadow-md">
+      <div className="py-5 px-6 bg-white border border-green-500 rounded-2xl shadow-md">
         <div className="flex gap-5 items-center max-md:flex-col">
           {/* Job Info Section */}
           <div className="flex flex-col w-4/5 max-md:w-full">
@@ -58,6 +60,7 @@ function JobCard({ title, company, location,pay,shift,time,role,description }) {
         </div>
       </div>
     </div>
+
     {/* JobDetailsCard component for showing the gig details */}
     {isOpen && (
       <JobDetailsCardDisplay
@@ -75,7 +78,11 @@ function JobCard({ title, company, location,pay,shift,time,role,description }) {
       />
     )}
     </>
+
+
+
+
   );
 }
 
-export default JobCard;
+export default ApprovedJobCard;

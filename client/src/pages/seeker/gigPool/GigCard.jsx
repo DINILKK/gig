@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import JobDetailsCard from '../../components/DetailCard/JobDetailCard'; // Import the JobDetailsCard component
+import JobDetailsCard from '../../../components/DetailCard/JobDetailCard'; // Import the JobDetailsCard component
 
 const GigCard = ({ title, company, shift, duration, pay, imageUrl,description ,role,time,type,location}) => {
   const [isOpen, setIsOpen] = useState(false); // State to control the details modal

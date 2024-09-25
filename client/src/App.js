@@ -2,10 +2,10 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import SignInPage from "./pages/SignUpPage/CreateAccount"
 import LoginPage from "./pages/gigLogin/LoginPage"
-import HomePage from "./pages/HomePage/HomePage"
-import GigPool from "./pages/gigPool/GigPool"
-import GigJournal from "./pages/gigJournal/GigJournal"
-import GigTracker from "./pages/gigTracker/GigTracker"
+import HomePage from "./pages/seeker/HomePage/HomePage"
+import GigPool from "./pages/seeker/gigPool/GigPool"
+import GigJournal from "./pages/seeker/gigJournal/GigJournal"
+import GigTracker from "./pages/seeker/gigTracker/GigTracker"
 import axios from 'axios'
 
 
@@ -25,6 +25,7 @@ function App() {
           <Route path='/gigtracker' element={<GigTracker/>}/>
         </Routes>
       </BrowserRouter>
+      {/* <GigJournal/> */}
     </div>
   );
 }
