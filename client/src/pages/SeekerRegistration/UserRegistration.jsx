@@ -30,11 +30,8 @@ function UserRegistration() {
               <InputField key={index} label={field.label} type={field.type} />
             ))}
           </div>
-          <CheckboxField />
-          <button
-            type="submit"
-            className="px-16 py-8 mt-16 w-48 max-w-full font-semibold leading-tight text-white whitespace-nowrap bg-teal-600 rounded-[30px] max-md:px-5 max-md:mt-10"
-          >
+          <CheckboxField label="By confirming you have been agreed to our terms" />
+          <button className="px-16 py-8 mt-16 w-48 max-w-full font-semibold leading-tight text-white whitespace-nowrap bg-teal-600 rounded-[30px] max-md:px-5 max-md:mt-10">
             CREATE
           </button>
         </form>

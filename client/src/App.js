@@ -6,6 +6,7 @@ import HomePage from "./pages/seeker/HomePage/HomePage"
 import GigPool from "./pages/seeker/gigPool/GigPool"
 import GigJournal from "./pages/seeker/gigJournal/GigJournal"
 import GigTracker from "./pages/seeker/gigTracker/GigTracker"
+import SeekerRegistration from "./pages/SeekerRegistration/UserRegistration"
 import axios from 'axios'
 
 
@@ -15,7 +16,7 @@ axios.defaults.withCredentials = true;
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
@@ -24,8 +25,8 @@ function App() {
           <Route path='/gigjournal' element={<GigJournal/>}/>
           <Route path='/gigtracker' element={<GigTracker/>}/>
         </Routes>
-      </BrowserRouter>
-      {/* <GigJournal/> */}
+      </BrowserRouter> */}
+      <GigTracker/>
     </div>
   );
 }
