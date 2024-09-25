@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function EmailSignUp() {
   const [role, setRole] = useState("");
@@ -48,9 +49,9 @@ function EmailSignUp() {
           Sign up
         </span>
       </button>
-      <a href="#" className="self-center mt-2 text-zinc-100 hover:opacity-80">
+      <Link to={'/login'} className="self-center mt-2 text-zinc-100 hover:opacity-80">
   Already have an account? Login
-</a>
+</Link>
 
     </form>
   );
