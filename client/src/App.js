@@ -7,6 +7,7 @@ import GigPool from "./pages/seeker/gigPool/GigPool"
 import GigJournal from "./pages/seeker/gigJournal/GigJournal"
 import GigTracker from "./pages/seeker/gigTracker/GigTracker"
 import SeekerRegistration from "./pages/SeekerRegistration/UserRegistration"
+import SeekerProfile from "./pages/seeker/gigUserProfile/ProfilePage"
 import axios from 'axios'
 
 
@@ -26,7 +27,8 @@ function App() {
           <Route path='/gigtracker' element={<GigTracker/>}/>
         </Routes>
       </BrowserRouter> */}
-      <GigTracker/>
+      <SeekerProfile/>
+      {/* <GigPool/> */}
     </div>
   );
 }
