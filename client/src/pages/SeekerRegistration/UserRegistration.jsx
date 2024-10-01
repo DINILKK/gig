@@ -7,11 +7,10 @@ const inputFields = [
   { label: 'EMAIL ID', type: 'email' },
   { label: 'UserId', type: 'text' },
   { label: 'Address', type: 'text' },
-  { label: 'Skills', type: 'text' },
-  { label: 'Location', type: 'text' },
+  { label: 'City', type: 'text' },
   { label: 'ph-No', type: 'tel' },
   { label: 'Password', type: 'password' },
-  { label: 'Conform Password', type: 'password' },
+  { label: 'Confirm Password', type: 'password' },
 ];
 
 function UserRegistration() {
