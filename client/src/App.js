@@ -6,7 +6,10 @@ import HomePage from "./pages/seeker/HomePage/HomePage"
 import GigPool from "./pages/seeker/gigPool/GigPool"
 import GigJournal from "./pages/seeker/gigJournal/GigJournal"
 import GigTracker from "./pages/seeker/gigTracker/GigTracker"
+import ProviderRegistration from "./pages/ProvidersRegiatration/UserRegistration"
 import SeekerRegistration from "./pages/SeekerRegistration/UserRegistration"
+import GigPost from "./pages/Providers/GigPost/GigPost"
+import GigList from './pages/Providers/YourGig/GigList';
 import SeekerProfile from "./pages/seeker/gigUserProfile/ProfilePage"
 import axios from 'axios'
 
@@ -27,8 +30,7 @@ function App() {
           <Route path='/gigtracker' element={<GigTracker/>}/>
         </Routes>
       </BrowserRouter> */}
-      <SeekerProfile/>
-      {/* <GigPool/> */}
+      <GigList/>
     </div>
   );
 }
