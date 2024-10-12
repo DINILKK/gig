@@ -10,6 +10,7 @@ import ProviderRegistration from "./pages/ProvidersRegiatration/UserRegistration
 import SeekerRegistration from "./pages/SeekerRegistration/UserRegistration"
 import GigPost from "./pages/Providers/GigPost/GigPost"
 import GigList from './pages/Providers/YourGig/GigList';
+import SeekerProfile from "./pages/seeker/gigUserProfile/ProfilePage"
 import axios from 'axios'
 
 
