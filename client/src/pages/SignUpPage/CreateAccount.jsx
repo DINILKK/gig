@@ -6,8 +6,8 @@ import TermsAgreement from "./TermsAgreement";
 
 function CreateAccount() {
   return (
-    <main className="flex flex-col bg-white">
-      <section className="flex flex-wrap justify-between items-center w-full bg-gray-800 max-md:max-w-full">
+    <main className="flex flex-col bg-white min-h-screen">
+      <section className="flex flex-wrap justify-between items-center w-full bg-gray-800 max-md:max-w-full min-h-screen">
         <div className="flex flex-1 shrink gap-2 justify-center items-center self-stretch px-4 py-20 my-auto w-full basis-0 min-h-[803px] min-w-[322px] max-md:max-w-full">
           <div className="flex flex-col flex-1 shrink justify-center self-stretch p-8 my-auto bg-gray-800 basis-0 max-w-[480px] min-w-[240px] rounded-[32px] w-[480px] max-md:px-5 max-md:max-w-full">
             <header className="flex flex-col justify-center w-full text-center">
