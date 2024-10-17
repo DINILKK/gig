@@ -4,37 +4,36 @@ const applicationSchema = new mongoose.Schema({
   applicationId: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   jobId: {
     type: String,
-    required: true
+    required: true,
   },
   seekerId: {
     type: String,
-    required: true
+    required: true,
   },
   providerId: {
     type: String,
-    required: true
+    required: true,
   },
   status: {
     type: String,
-    enum: ['pending', 'accepted', 'rejected'],
-    default: 'pending'
+    enum: ['pending', 'accepted', 'rejected', 'done'],  
+    default: 'pending',
   },
   appliedDate: {
     type: Date,
     required: true,
-    default: Date.now
+    default: Date.now,
   },
   reviewDate: {
     type: Date,
-    default: null
-  }
+    default: null,
+  },
 });
 
-// Create the model
-const Application = mongoose.model('Application', applicationSchema);
+const Application = mongoose.model('application', applicationSchema);
 
 module.exports = Application;

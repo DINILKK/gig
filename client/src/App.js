@@ -30,7 +30,8 @@ function App() {
           <Route path='/gigtracker' element={<GigTracker/>}/>
         </Routes>
       </BrowserRouter> */}
-      <GigList/>
+      <GigPost/>
+      
     </div>
   );
 }

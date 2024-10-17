@@ -1,24 +1,20 @@
 import React from "react";
 
-function FormField({ label, type }) {
+function FormField({ label, type, formData, handleInputChange, placeholder, error }) {
   const inputId = label.toLowerCase().replace(/\s+/g, '-');
 
   let inputElement;
+  const commonClasses = "flex shrink-0 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200";
+
   if (type === "textarea") {
     inputElement = (
       <textarea
         id={inputId}
-        className="flex shrink-0 bg-white rounded-lg h-[110px] w-full"
+        className={`${commonClasses} h-[110px] w-full p-3`}
         aria-label={label}
-      />
-    );
-  } else if(type==="text") {
-    inputElement = (
-      <input
-        type={type}
-        id={inputId}
-        className="flex shrink-0 bg-white rounded-lg h-[40px] w-full"
-        aria-label={label}
+        placeholder={placeholder}
+        value={formData[inputId] || ''} // Controlled component
+        onChange={(e) => handleInputChange({ target: { name: inputId, value: e.target.value } })} // Handle input change
       />
     );
   } else {
@@ -26,22 +22,26 @@ function FormField({ label, type }) {
       <input
         type={type}
         id={inputId}
-        className="flex shrink-0 bg-white rounded-lg "
+        className={`${commonClasses} h-[40px] w-full p-2`}
         aria-label={label}
+        placeholder={placeholder}
+        value={formData[inputId] || ''} // Controlled component
+        onChange={(e) => handleInputChange({ target: { name: inputId, value: e.target.value } })} // Handle input change
       />
     );
   }
 
   return (
-    <div className="flex gap-5 justify-between items-center max-w-full w-[400px] mt-9 first:mt-0">
+    <div className="flex flex-col gap-2 mt-9 first:mt-0">
       <label 
         htmlFor={inputId} 
-        className="flex flex-col text-2xl leading-tight whitespace-nowrap text-zinc-50 min-w-[120px] text-right">
+        className="text-lg leading-tight text-white">
         {label}
       </label>
-      <div className="flex-grow">
+      <div className="flex-grow w-full">
         {inputElement}
       </div>
+      {error && <span className="text-red-500 text-sm">{error}</span>} {/* Error message */}
     </div>
   );
 }
