@@ -7,8 +7,14 @@ import GigPool from "./pages/seeker/gigPool/GigPool"
 import GigJournal from "./pages/seeker/gigJournal/GigJournal"
 import GigTracker from "./pages/seeker/gigTracker/GigTracker"
 import SeekerRegistration from "./pages/SeekerRegistration/UserRegistration"
+import UserRegistration from "./pages/ProviderRegistration/UserRegistration"
 import SeekerProfile from "./pages/seeker/gigUserProfile/ProfilePage"
+import ProfileChanger from "./pages/ProfileChanger/UserRegistration"
+import ChangePassword from './pages/ChangePassword/ChangePassword';
 import axios from 'axios'
+import ProfileHeader from './pages/seeker/gigUserProfile/ProfileComponents/ProfileHeader';
+import ProfilePage from './pages/seeker/gigUserProfile/ProfilePage';
+import GigConfirmation from './pages/seeker/GigConfirmations/GigConfirmation.tsx';
 
 
 
@@ -17,7 +23,7 @@ axios.defaults.withCredentials = true;
 function App() {
   return (
     <div className="App">
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Routes>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
@@ -26,9 +32,7 @@ function App() {
           <Route path='/gigjournal' element={<GigJournal/>}/>
           <Route path='/gigtracker' element={<GigTracker/>}/>
         </Routes>
-      </BrowserRouter> */}
-      <SeekerProfile/>
-      {/* <GigPool/> */}
+      // </BrowserRouter>
     </div>
   );
 }
