@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const gigPoolRouter = require('./routes/gigPoolRouter');
 const seekerCreationRouter = require('./routes/seekerCreationRouter');
+const providerCreationRouter = require('./routes/providerCreationRouter');
 require('dotenv').config();
 const connectDB = require("./config/db");
 
@@ -19,6 +20,7 @@ app.use(express.json());
 // Mount the router at /api
 app.use('/api', gigPoolRouter);
 app.use('/api', seekerCreationRouter);
+app.use('/api', providerCreationRouter)
 
 // Connect to database
 connectDB();
