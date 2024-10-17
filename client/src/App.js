@@ -6,8 +6,11 @@ import HomePage from "./pages/seeker/HomePage/HomePage"
 import GigPool from "./pages/seeker/gigPool/GigPool"
 import GigJournal from "./pages/seeker/gigJournal/GigJournal"
 import GigTracker from "./pages/seeker/gigTracker/GigTracker"
+import ProviderRegistration from "./pages/ProvidersRegiatration/UserRegistration"
 import SeekerRegistration from "./pages/SeekerRegistration/UserRegistration"
 import UserRegistration from "./pages/ProviderRegistration/UserRegistration"
+import GigPost from "./pages/Providers/GigPost/GigPost"
+import GigList from './pages/Providers/YourGig/GigList';
 import SeekerProfile from "./pages/seeker/gigUserProfile/ProfilePage"
 import ProfileChanger from "./pages/ProfileChanger/UserRegistration"
 import ChangePassword from './pages/ChangePassword/ChangePassword';
@@ -32,7 +35,7 @@ function App() {
           <Route path='/gigjournal' element={<GigJournal/>}/>
           <Route path='/gigtracker' element={<GigTracker/>}/>
         </Routes>
-      // </BrowserRouter>
+      </BrowserRouter>
     </div>
   );
 }

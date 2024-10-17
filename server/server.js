@@ -3,6 +3,7 @@ const cors = require('cors');
 const gigPoolRouter = require('./routes/gigPoolRouter');
 require('dotenv').config();
 const connectDB = require("./config/db");
+const gigTrackerRouter = require("./routes/gigTrackerRouter");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -17,6 +18,7 @@ app.use(express.json());
 
 // Mount the router at /api
 app.use('/api', gigPoolRouter);
+app.use('/api',gigTrackerRouter);
 
 // Connect to database
 connectDB();
