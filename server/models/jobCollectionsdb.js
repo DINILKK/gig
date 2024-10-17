@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -15,7 +16,7 @@ const jobSchema = new mongoose.Schema({
   type: { type: String, required: true },
   location: { type: String, required: true },
   providerId: { type: String, required: true },
-  lastDate: { type: Date, required: true }, // New lastDate field
+  date: { type: Date, required: true }, // New lastDate field
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });

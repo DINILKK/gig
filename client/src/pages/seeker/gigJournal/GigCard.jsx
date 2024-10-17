@@ -1,6 +1,6 @@
 import React from 'react';
 
-function GigCard({ title, location, address, amount, rating, date,img }) {
+function GigCard({ title, location, address, amount, rating, date, img, status }) {
   return (
     <article className="flex flex-col w-full shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-md:max-w-full mb-24 last:mb-0">
       <div className="flex flex-wrap gap-5 justify-between items-start px-9 pt-6 pb-9 w-full bg-white rounded-[30px] max-md:px-5 max-md:max-w-full">
@@ -32,23 +32,16 @@ function GigCard({ title, location, address, amount, rating, date,img }) {
           <div className="flex flex-col my-auto font-semibold whitespace-nowrap">
             <img
               loading="lazy"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Indian_Rupee_symbol.svg/135px-Indian_Rupee_symbol.svg.png" 
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Indian_Rupee_symbol.svg/135px-Indian_Rupee_symbol.svg.png"
               className="object-contain self-center aspect-[0.65] w-[20px] mt-[10px]"
               alt="Amount Icon"
             />
             <p className="mt-2.5">{amount}</p>
           </div>
-          {/* Rating Section */}
-          {/* Uncomment if needed */}
-          {/* <div className="flex flex-col my-auto font-semibold whitespace-nowrap">
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/c891ce291f1cdb8c047051a1f4fd841443fd1e1c07e6397c45774ac6fcff548f?placeholderIfAbsent=true&apiKey=b1b7c46b698f4e75aa8360aa33741bab"
-              className="object-contain w-11 aspect-[1.1]"
-              alt="Rating Icon"
-            />
-            <p className="self-start mt-4">{rating}</p>
-          </div> */}
+          {/* Status Section */}
+          <div className="flex flex-col my-auto font-semibold whitespace-nowrap">
+            <p className="self-start mt-4">Status <p className={status === 'done' ? 'text-green-600' : status === 'rejected' ? 'text-red-600' : 'text-yellow-600'}>{status}</p></p>
+          </div>
           {/* Date Section */}
           <div className="flex flex-col self-start">
             <img
