@@ -34,7 +34,13 @@ function App() {
           <Route path='/seekerRegistration' element={<SeekerRegistration/>}/>
           <Route path='/providerRegistration' element={<ProviderRegistration/>}/>
         </Routes>
+<<<<<<< HEAD
       </BrowserRouter>
+=======
+      </BrowserRouter> */}
+      <GigPost/>
+      
+>>>>>>> a7d846e1e57b0afee2583bc44aed6be0000e27e7
     </div>
   );
 }
