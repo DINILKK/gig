@@ -8,11 +8,17 @@ import GigJournal from "./pages/seeker/gigJournal/GigJournal"
 import GigTracker from "./pages/seeker/gigTracker/GigTracker"
 import ProviderRegistration from "./pages/ProvidersRegiatration/UserRegistration"
 import SeekerRegistration from "./pages/SeekerRegistration/UserRegistration"
+import UserRegistration from "./pages/ProviderRegistration/UserRegistration"
 import GigPost from "./pages/Providers/GigPost/GigPost"
 import GigList from './pages/Providers/YourGig/GigList';
 import SeekerProfile from "./pages/seeker/gigUserProfile/ProfilePage"
 
+import ProfileChanger from "./pages/ProfileChanger/UserRegistration"
+import ChangePassword from './pages/ChangePassword/ChangePassword';
 import axios from 'axios'
+import ProfileHeader from './pages/seeker/gigUserProfile/ProfileComponents/ProfileHeader';
+import ProfilePage from './pages/seeker/gigUserProfile/ProfilePage';
+import GigConfirmation from './pages/seeker/GigConfirmations/GigConfirmation.tsx';
 
 
 

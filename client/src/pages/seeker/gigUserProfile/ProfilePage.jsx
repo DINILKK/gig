@@ -1,17 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProfileHeader from './ProfileComponents/ProfileHeader';
 import ProfileCard from './ProfileComponents/ProfileCard';
 import ActionButton from './ProfileComponents/ActionButton';
 import StatCard from './ProfileComponents/StatCard';
 import WalletCard from './ProfileComponents/WalletCard';
 import HomeButton from './ProfileComponents/HomeButton';
+import Modal from "../../../components/Modal"; // Import the modal component
+import UserRegistration from "../../ProfileChanger/UserRegistration"; // Import the registration component
+import ChangePassword from '../../ChangePassword/ChangePassword'; // Import ChangePassword component
 
 function ProfilePage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState(null); // State for modal content
+
   const actionButtons = [
-    { text: 'Profile details', onClick: () => { } },
-    { text: 'Change Password', onClick: () => { } },
-    { text: 'get Help!', onClick: () => { } },
-    { text: 'Log Out', onClick: () => { }, isSemiBold: true },
+    {
+      text: 'Profile details',
+      onClick: () => {
+        setModalContent(<UserRegistration />); // Render UserRegistration in the modal
+        setIsModalOpen(true);
+      }
+    },
+    {
+      text: 'Change Password',
+      onClick: () => {
+        setModalContent(<ChangePassword />); // Render ChangePassword in the modal
+        setIsModalOpen(true);
+      }
+    },
+    { text: 'Get Help!', onClick: () => {} },
+    { text: 'Log Out', onClick: () => {}, isSemiBold: true },
   ];
 
   return (
@@ -28,7 +46,6 @@ function ProfilePage() {
           </div>
           <div className="ml-5 w-[65%] max-md:ml-0 max-md:w-full">
             <div className="flex flex-col mt-1.5 w-full max-md:mt-10 max-md:max-w-full">
-
               {/* No of Gigs and Wallet Section */}
               <div className="flex gap-5 max-md:flex-col">
                 <div className="flex flex-col w-2/5 max-md:ml-0 max-md:w-full">
@@ -50,11 +67,16 @@ function ProfilePage() {
                   <ActionButton key={index} {...button} />
                 ))}
               </div>
-
             </div>
           </div>
         </div>
       </div>
+
+      {/* Modal for Profile Editing or Changing Password */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        {modalContent} {/* Dynamically render modal content */}
+      </Modal>
+
       <HomeButton />
     </main>
   );
