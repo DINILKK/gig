@@ -16,7 +16,7 @@ const jobSchema = new mongoose.Schema({
   type: { type: String, required: true },
   location: { type: String, required: true },
   providerId: { type: String, required: true },
-  date: { type: Date, required: true }, // New lastDate field
+  lastdate: { type: Date, required: true }, // New lastDate field
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });
