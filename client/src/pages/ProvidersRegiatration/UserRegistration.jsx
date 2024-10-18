@@ -49,17 +49,22 @@ function UserRegistration() {
     e.preventDefault();
     setError('');
     setSuccess('');
-
+  
     // Password match validation
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match.');
       return;
     }
-
+  
     try {
       // Send form data to the backend using axios
       const response = await axios.post('/api/providerCreation', formData);
+  
       if (response.status === 201) {
+        const { token } = response.data; // Assuming the token is sent in the response
+        // Store the token in localStorage (or sessionStorage)
+        localStorage.setItem('authToken', token); // Storing token securely
+  
         setSuccess('Registration successful!');
         // Reset form
         setFormData({
@@ -74,6 +79,7 @@ function UserRegistration() {
           password: '',
           confirmPassword: ''
         });
+  
         // Navigate to 'GigPost' after successful registration
         navigate('/GigPost');
       }
@@ -85,7 +91,7 @@ function UserRegistration() {
       }
     }
   };
-
+  
   return (
     <main className="flex flex-col rounded-none bg-gray-800 min-h-screen">
       <header className="z-10 -mt-3 text-4xl font-semibold text-white max-md:max-w-full">

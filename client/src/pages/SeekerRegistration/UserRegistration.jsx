@@ -73,7 +73,7 @@ function UserRegistration() {
         });
 
         // Redirect to Gig Pool page on success
-        navigate('/gigpool');
+        navigate('/GigPool');
       }
     } catch (err) {
       if (err.response && err.response.data && err.response.data.message) {

@@ -3,7 +3,7 @@ import Header from "./Header";
 import GigForm from "./GigForm";
 import ActionButtons from "./ActionButtons";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode"; // Fixed import for jwtDecode
 
 function ShareOpportunities() {
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ function ShareOpportunities() {
       [name]: value,
     });
 
-    // Clear the error for this field when user types
+    // Clear the error for this field when the user types
     setFormErrors({
       ...formErrors,
       [name]: '',
@@ -34,19 +34,29 @@ function ShareOpportunities() {
 
   const handlePost = () => {
     try {
-      const token = localStorage.getItem('authToken'); 
+      const token = localStorage.getItem('token');
       if (token) {
+        // console.log("Token found");
         const decodedToken = jwtDecode(token);
-        const userId = decodedToken.userid; 
-        axios.post("/api/post", { formData, userId })
-          .then(response => {
-            // Handle success response
-            console.log("Data posted successfully:", response.data);
-          })
-          .catch(error => {
-            // Handle error response
-            console.error("Error posting data:", error);
-          });
+        const userId = decodedToken.userId; 
+        // console.log("Decoded token:", decodedToken);
+        console.log("Form Data:", userId);
+
+        // Axios post request with correct data structure
+        axios.post("/api/post", { ...formData, userId }, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true,
+        })
+        .then(response => {
+          console.log("Data posted successfully:", response.data);
+        })
+        .catch(error => {
+          console.error("Error posting data:", error.response?.data || error);
+        });
+      }else{
+        console.log('token not found')
       }
     } catch (error) {
       console.error("Error decoding token:", error);

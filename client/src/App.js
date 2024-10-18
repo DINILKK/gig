@@ -16,8 +16,9 @@ import axios from 'axios'
 
 
 
-axios.defaults.baseURL = process.env.AXIOS_URL || 'http://localhost:5000';
+axios.defaults.baseURL = process.env.AXIOS_URL || 'http://localhost:5001';
 axios.defaults.withCredentials = true;
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path='/gigPost' element={<GigPost />} />
           <Route path='/seekerRegistration' element={<SeekerRegistration/>}/>
           <Route path='/providerRegistration' element={<ProviderRegistration/>}/>
+          <Route path='/seekerprofile' element={<SeekerProfile/>}/>
         </Routes>
       </BrowserRouter>
     </div>
