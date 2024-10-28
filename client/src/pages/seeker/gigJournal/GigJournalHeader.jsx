@@ -3,6 +3,7 @@ import { FaUserCircle } from 'react-icons/fa'; // Import Font Awesome user icon
 import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 
 function Header() {
+  const UserId = localStorage.getItem('userId');
   return (
     <header className="bg-gray-800 border-b border-gray-700 w-full fixed top-0 left-0 shadow-lg z-50">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -19,7 +20,7 @@ function Header() {
           </div>
           <div className="flex flex-col items-center mt-4 md:mt-0 md:flex-row md:items-center md:space-x-10">
             <Link 
-              to="/gigpool" 
+              to={`/gigpool/${UserId}`} 
               title="Gig Pool" 
               className="text-sm font-medium text-white transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70"
             >
@@ -27,7 +28,7 @@ function Header() {
             </Link>
 
             <Link 
-              to="/gigtracker" 
+              to= {`/gigtracker/${UserId}`} 
               title="Gig Tracker" 
               className="text-sm font-medium text-white transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70"
             >
@@ -35,7 +36,7 @@ function Header() {
             </Link>
 
             <Link 
-              to="/gigjournal" 
+              to={`/gigjournal/${UserId}`}
               title="Gig Journal" 
               className="text-sm font-medium text-teal-500 transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70"
             >
@@ -44,7 +45,7 @@ function Header() {
 
             {/* Profile Icon */}
             <Link 
-              to="/seekerprofile" 
+              to={`/seekerprofile/${UserId}`} 
               title="Profile" 
               className="text-white text-l ml-4"
             >
