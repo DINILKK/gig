@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearch] = useState('');
@@ -18,29 +19,29 @@ const Header = ({ onSearch }) => {
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <nav className="flex flex-wrap items-center justify-between h-auto lg:h-20 py-4">
           <div className="flex-shrink-0 flex items-center">
-            <a href="#" title="Home" className="flex items-center">
+            <Link to="/" title="Home" className="flex items-center">
               <img
                 className="w-auto h-8 lg:h-10"
                 src="#" // Replace with your logo URL
                 alt="Logo"
               />
               <h1 className="ml-2 text-4xl font-bold text-teal-500">gig</h1>
-            </a>
+            </Link>
           </div>
           <div className="flex flex-col items-center mt-4 md:mt-0 md:flex-row md:items-center md:space-x-10">
-            <a href="#" title="Gig Pool" className="text-sm font-medium text-teal-500 transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
+            <Link to="/gigpool" title="Gig Pool" className="text-sm font-medium text-teal-500 transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
               gig pool
-            </a>
-            <a href="#" title="Gig Tracker" className="text-sm font-medium text-white transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
+            </Link>
+            <Link to="/gigtracker" title="Gig Tracker" className="text-sm font-medium text-white transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
               gig tracker
-            </a>
-            <a href="#" title="Gig Resources" className="text-sm font-medium text-white transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
+            </Link>
+            <Link to="/gigjournal" title="Gig Resources" className="text-sm font-medium text-white transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
               gig journal
-            </a>
+            </Link>
             {/* Profile Icon */}
-            <a href="#" title="Profile" className="text-white text-l ml-4">
+            <Link to="/seekerprofile" title="Profile" className="text-white text-l ml-4">
               <FaUserCircle className="w-8 h-8" />
-            </a>
+            </Link>
           </div>
         </nav>
         <div className="text-white text-2xl mt-8 mb-4 text-left">

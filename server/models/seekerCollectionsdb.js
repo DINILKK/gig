@@ -14,21 +14,27 @@ const applicantSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    match: /.+\@.+\..+/
+    match: /.+\@.+\..+/  // Simple email format validation
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    minlength: 6  // Example validation for password length
+  },
+  phone: {
+    type: String,
+    required: true,
+    match: /^[0-9]{10}$/  // Simple regex to ensure phone is 10 digits
   },
   appliedJobs: [{
     type: String,
-    required: true
+    required: false
   }],
-  skills: [{
-    type: String,
+  address: {
+    type: String,  // You had "Address" as an array; changing to a single field
     required: true
-  }],
-  location: {
+  },
+  city: {
     type: String,
     required: true
   },
@@ -40,9 +46,9 @@ const applicantSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-});
+}, { timestamps: true });  // Automatically adds 'createdAt' and 'updatedAt'
 
 // Create the model
-const seeker = mongoose.model('seeker', applicantSchema);
+const Seeker = mongoose.model('Seeker', applicantSchema);
 
-module.exports = seeker;
+module.exports = Seeker;

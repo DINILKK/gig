@@ -1,16 +1,16 @@
+// CheckboxField.js
 import React from 'react';
 
-function CheckboxField({ label }) {
+function CheckboxField({ label, checked, onChange }) {
   return (
-    <div className="flex gap-10 items-start mt-32 max-w-full w-[480px] max-md:mt-10">
+    <div className="flex items-center mt-5">
       <input
         type="checkbox"
-        id="terms"
-        className="flex shrink-0 mt-4 border border-black border-solid bg-zinc-100 h-[39px] w-[41px]"
+        checked={checked}
+        onChange={onChange}
+        className="mr-2"
       />
-      <label htmlFor="terms" className="flex-auto w-[388px]">
-        {label}
-      </label>
+      <label className="text-sm">{label}</label>
     </div>
   );
 }
