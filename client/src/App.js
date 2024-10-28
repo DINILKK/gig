@@ -37,10 +37,11 @@ function App() {
           <Route path='/gigpool/:id' element={<GigPool />} />
           <Route path='/gigjournal/:id' element={<GigJournal />} />
           <Route path='/gigtracker/:id' element={<GigTracker />} />
-          <Route path='/gigPost' element={<GigPost />} />
+          <Route path='/gigPost/:id' element={<GigPost />} />
           <Route path='/seekerRegistration' element={<SeekerRegistration/>}/>
           <Route path='/providerRegistration' element={<ProviderRegistration/>}/>
           <Route path='/seekerprofile/:id' element={<SeekerProfile/>}/>
+          <Route path='/yourgig/:id' element={<GigList/>}/>
         </Routes>
       </BrowserRouter>
     </div>

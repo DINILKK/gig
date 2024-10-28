@@ -1,13 +1,15 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import { FaUserCircle } from 'react-icons/fa';
 
 function Header() {
+  const userId = localStorage.getItem('userId')
   return (
     <header className="flex flex-col pt-3 pr-3.5 pb-8 pl-11 w-full bg-gray-800 max-md:pl-5 max-md:max-w-full">
       <nav className="flex justify-end gap-10 self-end max-w-full w-[976px] items-center">
         <div className="flex gap-10 items-center text-xl leading-tight text-white">
-          <a href="#" className="z-10 pt-0 pb-0.5 font-semibold ">Post a gig !</a>
-          <a href="#" className="z-10 pt-0 pb-0.5 font-medium text-teal-500">Your gigs</a>
+          <Link to={`/gigpost/${userId}`} className="z-10 pt-0 pb-0.5 font-semibold ">Post a gig !</Link>
+          <Link to={`/yourgig/${userId}`} className="z-10 pt-0 pb-0.5 font-medium text-teal-500">Your gigs</Link>
         </div>
         <a href="#" title="Profile" className="text-white text-l">
           <FaUserCircle className="w-8 h-8" />
