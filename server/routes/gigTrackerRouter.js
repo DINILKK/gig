@@ -3,6 +3,7 @@ const Applicationdb = require('../models/ApplicationsCollectionsdb');
 const JobCollectionsdb = require("../models/jobCollectionsdb");
 const router = express.Router();
 
+// Fetching status of applications
 router.get('/status', async (req, res) => {
   const { userid } = req.query; 
 
@@ -16,12 +17,13 @@ router.get('/status', async (req, res) => {
     const approvedJobIds = approvedApplications.map(app => app.jobId);
 
     // Fetch job details based on job IDs
-    const pendingJobs = await JobCollectionsdb.find({ id: { $in: pendingJobIds } });
-    const approvedJobs = await JobCollectionsdb.find({ id: { $in: approvedJobIds } });
+    const pendingJobs = await JobCollectionsdb.find({ jobId: { $in: pendingJobIds } });
+    const approvedJobs = await JobCollectionsdb.find({ jobId: { $in: approvedJobIds } });
 
     // Format the job details into the desired structure
     const formattedPendingJobs = pendingJobs.map(job => ({
-      id: job.id,
+      id: job._id, // Correctly reference the Mongoose _id
+      jobId: job.jobId, // Make sure this property exists in your schema
       title: job.title,
       company: job.company,
       shift: job.shift,
@@ -36,7 +38,8 @@ router.get('/status', async (req, res) => {
     }));
 
     const formattedApprovedJobs = approvedJobs.map(job => ({
-      id: job.id,
+      id: job._id, // Correctly reference the Mongoose _id
+      jobId: job.jobId, // Make sure this property exists in your schema
       title: job.title,
       company: job.company,
       shift: job.shift,
@@ -58,6 +61,7 @@ router.get('/status', async (req, res) => {
   }
 });
 
+// Fetching application history
 router.get('/history', async (req, res) => {
   const { userid } = req.query;
 
@@ -72,11 +76,11 @@ router.get('/history', async (req, res) => {
     const jobIds = history.map(app => app.jobId);
     
     // Fetch job details based on job IDs
-    const jobs = await JobCollectionsdb.find({ id: { $in: jobIds } });
+    const jobs = await JobCollectionsdb.find({ jobId: { $in: jobIds } }); // Change to jobId for consistency
 
     // Format the job details into the desired structure
     const formattedHistory = history.map(app => {
-      const job = jobs.find(job => job.id === app.jobId);
+      const job = jobs.find(job => job.jobId === app.jobId); // Ensure this matches your schema
       return {
         title: job.title,
         company: job.company,
@@ -92,6 +96,32 @@ router.get('/history', async (req, res) => {
   } catch (error) {
     console.error('Error fetching history:', error);
     res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// Cancel application
+router.delete('/applicationscancel/:jobId', async (req, res) => {
+  // console.log('hi')
+  const { jobId } = req.params;
+  const { userId } = req.body;
+  // console.log(jobId)
+  // console.log(userId) // This will now have the userId
+
+  try {
+    // First, find the application to return its details before deleting it
+    const application = await Applicationdb.findOne({ jobId, seekerId: userId }); // Use seekerId for clarity
+
+    if (!application) {
+      return res.status(404).json({ message: 'Application not found' });
+    }
+
+    // Then, delete the application
+    await Applicationdb.findOneAndDelete({jobId: jobId, seekerId: userId }); // Use seekerId for clarity
+
+    res.status(200).json({ message: 'Application cancelled', application });
+  } catch (error) {
+    console.error('Error cancelling application:', error); // Log the error for debugging
+    res.status(500).json({ message: 'Server error' });
   }
 });
 

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';  // Import Link from react-router-dom
 
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearch] = useState('');
+  const UserId = localStorage.getItem('userId');
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
@@ -29,17 +30,17 @@ const Header = ({ onSearch }) => {
             </Link>
           </div>
           <div className="flex flex-col items-center mt-4 md:mt-0 md:flex-row md:items-center md:space-x-10">
-            <Link to="/gigpool" title="Gig Pool" className="text-sm font-medium text-teal-500 transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
+            <Link to={`/gigpool/${UserId}`} title="Gig Pool" className="text-sm font-medium text-teal-500 transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
               gig pool
             </Link>
-            <Link to="/gigtracker" title="Gig Tracker" className="text-sm font-medium text-white transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
+            <Link to= {`/gigtracker/${UserId}`} title="Gig Tracker" className="text-sm font-medium text-white transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
               gig tracker
             </Link>
-            <Link to="/gigjournal" title="Gig Resources" className="text-sm font-medium text-white transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
+            <Link to={`/gigjournal/${UserId}`} title="Gig Resources" className="text-sm font-medium text-white transition-all duration-200 lg:text-base hover:text-opacity-70 focus:text-opacity-70">
               gig journal
             </Link>
             {/* Profile Icon */}
-            <Link to="/seekerprofile" title="Profile" className="text-white text-l ml-4">
+            <Link to={`/seekerprofile/${UserId}`} title="Profile" className="text-white text-l ml-4">
               <FaUserCircle className="w-8 h-8" />
             </Link>
           </div>

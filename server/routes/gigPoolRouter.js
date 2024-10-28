@@ -1,6 +1,7 @@
 const express = require('express');
 const JobCollection = require('../models/jobCollectionsdb');
 const router = express.Router();
+const Application = require('../models/ApplicationsCollectionsdb');
 
 // Handle GET request for job details with pagination
 router.get('/details', async (req, res) => {
@@ -110,5 +111,26 @@ router.get('/topCategories', async (req, res) => {
         return res.status(500).json({ message: 'Failed to retrieve jobs for this category' });
     }
 });
+
+router.post('/applications', async (req, res) => {
+    try {
+      const { jobId, seekerId, providerId, status } = req.body;
+    //   console.log('hi')
+      const newApplication = new Application({
+        jobId,
+        seekerId,
+        providerId,
+        status,
+      });
+  
+      // Save the application to the database
+      await newApplication.save();
+  
+      res.status(201).json({ message: 'Application submitted successfully', application: newApplication });
+    } catch (error) {
+      console.error('Error creating application:', error);
+      res.status(500).json({ message: 'Error submitting application', error });
+    }
+  });
 
 module.exports = router;

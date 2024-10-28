@@ -51,7 +51,7 @@ function LoginForm() {
         localStorage.setItem('userId', userId);
 
         // Redirect to a protected route (e.g., dashboard)
-        formData.role === 'seeker' ? navigate('/gigPool') : navigate('/gigPost')
+        formData.role === 'seeker' ? navigate(`/gigPool/${userId}`) : navigate(`/gigPost/${userId}`)
         //navigate('/dashboard');
       }
     } catch (err) {
