@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import JobDetailsCard from '../../../components/DetailCard/JobDetailCard'; // Import the JobDetailsCard component
 
-const GigCard = ({ title, company, shift, duration, pay, imageUrl,description ,role,time,type,location}) => {
-  const [isOpen, setIsOpen] = useState(false); // State to control the details modal
+const GigCard = ({jobId,providerId, title, company, shift, duration, pay, imageUrl,description ,role,time,type,location}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const UserId = localStorage.getItem('userId'); // State to control the details modal
 
   // Open the job details modal
   const openDetails = () => {
@@ -59,6 +60,8 @@ const GigCard = ({ title, company, shift, duration, pay, imageUrl,description ,r
       {isOpen && (
         <JobDetailsCard
           job={{
+            id:jobId,
+            providerId:providerId,
             title: title,
             role : role,
             location: location, // or any other field you want
@@ -69,6 +72,7 @@ const GigCard = ({ title, company, shift, duration, pay, imageUrl,description ,r
             description : description // Add actual contact info
           }}
           onClose={closeDetails}
+          seekerId={UserId}
         />
       )}
     </>

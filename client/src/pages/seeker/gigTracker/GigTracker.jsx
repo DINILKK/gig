@@ -4,32 +4,37 @@ import ApplicationStatus from './ApplicationStatus';
 import JobCard from './JobCard';
 import ApprovedJobCard from './ApprovedJobCard';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 
 function GigTracker() {
   const [pendingJobs, setPendingJobs] = useState([]);
   const [approvedJobs, setApprovedJobs] = useState([]);
 
   useEffect(() => {
+    // Function to fetch pending and approved jobs from the API
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('authToken'); 
-        if (token) {
-          const decodedToken = jwtDecode(token);
-          const userId = decodedToken.userid; 
-          
+        const userId = localStorage.getItem('userId'); 
+        if (userId) {
           const response = await axios.get(`/api/status`, { params: { userid: userId } });
           
           setApprovedJobs(response.data.approvedJobs || []);
           setPendingJobs(response.data.pendingJobs || []);
-          console.log(response.data); 
+          console.log('Fetched Pending Jobs:', response.data.pendingJobs);
+          console.log('Fetched Approved Jobs:', response.data.approvedJobs); 
         }
       } catch (error) {
-        console.error(error); 
+        console.error('Error fetching job data:', error); 
       }
     };
-    fetchData();
+    
+    fetchData(); // Fetch data on component mount
   }, []);
+
+  // Function to handle application cancellation
+  // const handleApplicationCancelled = (jobId) => {
+  //   // Remove the cancelled job from pendingJobs
+  //   setPendingJobs((prevJobs) => prevJobs.filter((job) => job.jobId !== jobId));
+  // };
 
   return (
     <div className="flex flex-col items-center bg-white">
@@ -46,7 +51,11 @@ function GigTracker() {
                 iconSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/26ced1833dca9cc0765ba02e194eb98eca00a60a7a57c806f7829e954b45e7b8?apiKey=b1b7c46b698f4e75aa8360aa33741bab"
               />
               {pendingJobs.map((job) => (
-                <JobCard key={job.id} {...job} />
+                <JobCard 
+                  key={job.id} 
+                  {...job} 
+                  // onApplicationCancelled={handleApplicationCancelled} // Pass the handler
+                />
               ))}
             </div>
           </aside>

@@ -34,13 +34,13 @@ function App() {
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path='/signin' element={<SignInPage />} />
-          <Route path='/gigpool' element={<GigPool />} />
-          <Route path='/gigjournal' element={<GigJournal />} />
-          <Route path='/gigtracker' element={<GigTracker />} />
+          <Route path='/gigpool/:id' element={<GigPool />} />
+          <Route path='/gigjournal/:id' element={<GigJournal />} />
+          <Route path='/gigtracker/:id' element={<GigTracker />} />
           <Route path='/gigPost' element={<GigPost />} />
           <Route path='/seekerRegistration' element={<SeekerRegistration/>}/>
           <Route path='/providerRegistration' element={<ProviderRegistration/>}/>
-          <Route path='/seekerprofile' element={<SeekerProfile/>}/>
+          <Route path='/seekerprofile/:id' element={<SeekerProfile/>}/>
         </Routes>
       </BrowserRouter>
     </div>
