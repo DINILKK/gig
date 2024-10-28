@@ -12,6 +12,7 @@ import UserRegistration from "./pages/ProviderRegistration/UserRegistration"
 import GigPost from "./pages/Providers/GigPost/GigPost"
 import GigList from './pages/Providers/YourGig/GigList';
 import SeekerProfile from "./pages/seeker/gigUserProfile/ProfilePage"
+
 import ProfileChanger from "./pages/ProfileChanger/UserRegistration"
 import ChangePassword from './pages/ChangePassword/ChangePassword';
 import axios from 'axios'
@@ -21,19 +22,25 @@ import GigConfirmation from './pages/seeker/GigConfirmations/GigConfirmation.tsx
 
 
 
-axios.defaults.baseURL = process.env.AXIOS_URL || 'http://localhost:5000';
+axios.defaults.baseURL = process.env.AXIOS_URL || 'http://localhost:5001';
 axios.defaults.withCredentials = true;
+axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<HomePage/>}/>
-          <Route path='/login' element={<LoginPage/>}/>
-          <Route path='/signin' element={<SignInPage/>}/>
-          <Route path='/gigpool' element={<GigPool/>}/>
-          <Route path='/gigjournal' element={<GigJournal/>}/>
-          <Route path='/gigtracker' element={<GigTracker/>}/>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/signin' element={<SignInPage />} />
+          <Route path='/gigpool' element={<GigPool />} />
+          <Route path='/gigjournal' element={<GigJournal />} />
+          <Route path='/gigtracker' element={<GigTracker />} />
+          <Route path='/gigPost' element={<GigPost />} />
+          <Route path='/seekerRegistration' element={<SeekerRegistration/>}/>
+          <Route path='/providerRegistration' element={<ProviderRegistration/>}/>
+          <Route path='/seekerprofile' element={<SeekerProfile/>}/>
         </Routes>
       </BrowserRouter>
     </div>

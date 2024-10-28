@@ -1,18 +1,21 @@
 import React from 'react';
 
-function InputField({ label, type }) {
-  const id = label.toLowerCase().replace(/\s+/g, '-');
+const InputField = ({ label, type, name, onChange }) => {
   return (
-    <>
-      <label htmlFor={id} className="grow shrink w-[136px]">{label}</label>
+    <div className="flex flex-col w-full mb-4">
+      <label htmlFor={name} className="text-sm font-medium text-gray-700">
+        {label}
+      </label>
       <input
-        id={id}
+        id={name}
+        name={name}
         type={type}
-        className="flex grow shrink bg-white border border-black border-solid h-[60px] min-w-[240px] w-[518px] max-md:max-w-full"
-        aria-label={label}
+        onChange={onChange}
+        className="p-2 mt-1 border border-gray-300 rounded-md"
+        required
       />
-    </>
+    </div>
   );
-}
+};
 
 export default InputField;
