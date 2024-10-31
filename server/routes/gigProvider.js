@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Applicationdb = require('../models/ApplicationsCollectionsdb')
 const JobCollection = require('../models/jobCollectionsdb');
 const ProviderCollection = require('../models/providerCollectiondb');
-
+const SeekerCollection = require('../models/seekerCollectionsdb')
 const router = express.Router();
 
 router.post('/post', async (req, res) => {
@@ -97,17 +97,98 @@ router.get('/yourgigs', async (req, res) => {
     );
 
     // Filter out jobs with no pending applications
-    const filteredData = data.filter(item => item.applicants > 0);
+    // const filteredData = data.filter(item => item.applicants > 0);
 
-    console.log(filteredData); // Log the filtered data
+    // console.log(filteredData); // Log the filtered data
     // Send response with formatted data
-    res.status(200).json(filteredData);
+    res.status(200).json(data);
   } catch (error) {
     console.error("Error fetching gigs:", error);
     res.status(500).json({ error: "Failed to retrieve gigs" });
   }
 });
 
+
+router.get('/personalDetails', async (req, res) => {
+  const { userId: providerId, jobId } = req.query; // Use req.query for query parameters
+  
+  if (!providerId || !jobId) {
+    return res.status(400).json({ error: "Provider ID and Job ID are required" });
+  }
+  
+  try {
+    // Find applications with the specified providerId, jobId, and status "pending"
+    const applications = await Applicationdb.find({ providerId, jobId, status: "pending" });
+
+    // Map each application to fetch seeker details
+    const data = await Promise.all(
+      applications.map(async (application) => {
+        const seeker = await SeekerCollection.findById(application.seekerId);
+        
+        return {
+          name: seeker.name,
+          email: seeker.email,
+          phone: seeker.phone,
+          address: seeker.address,
+          city: seeker.city,
+          jobId: application.jobId,
+          seekerId: application.seekerId,
+          providerId: application.providerId
+        };
+      })
+    );
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Failed to retrieve personal details" });
+  }
+});
+
+
+
+router.post('/accepted', async (req, res) => {
+  const { status, jobId, seekerId, providerId } = req.body;
+  console.log({ status, jobId, seekerId, providerId })
+  try {
+    const response = await Applicationdb.findOneAndUpdate(
+      { seekerId: seekerId, jobId: jobId, providerId: providerId }, // Find criteria
+      { status: status }, // Update fields
+      { new: true } // Return the updated document
+    );
+
+    if (!response) {
+      return res.status(404).json({ message: 'Application not found' });
+    }
+
+    res.status(200).json({ message: 'Application updated successfully', data: response });
+  } catch (error) {
+    console.error('Error updating application:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
+router.post('/rejected', async (req, res) => {
+  const { status, jobId, seekerId, providerId } = req.body;
+  
+  try {
+    const response = await Applicationdb.findOneAndUpdate(
+      { seekerId: seekerId, jobId: jobId, providerId: providerId }, // Find criteria
+      { status: status }, // Update fields
+      { new: true } // Return the updated document
+    );
+
+    if (!response) {
+      return res.status(404).json({ message: 'Application not found' });
+    }
+
+    res.status(200).json({ message: 'Application updated successfully', data: response });
+  } catch (error) {
+    console.error('Error updating application:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 
 module.exports = router;

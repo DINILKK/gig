@@ -7,6 +7,7 @@ import Header from './Header';
 
 function GigList() {
   const { id: userId } = useParams();
+  const {jobId:jobId} = useParams();
   const [gigs, setGigs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -14,7 +15,7 @@ function GigList() {
   useEffect(() => {
     const fetchGigs = async () => {
       try {
-        const response = await axios.get('/api/yourgigs', { params: { userId } });
+        const response = await axios.get('/api/personalDetails', { params: { userId ,jobId} });
         setGigs(response.data);
       } catch (err) {
         console.error(err);
