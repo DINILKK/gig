@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { IoMdArrowDropright } from "react-icons/io";
-import { BiLogoGmail } from "react-icons/bi";
-import PerfectCandidateDetails from '../../../../components/PerfecrCandidateDetails/PerfectCandidateDetails'; // Rename to uppercase
+import { BiChat } from "react-icons/bi";
 import { Link } from 'react-router-dom';
+import PerfectCandidateDetails from '../../../../components/PerfecrCandidateDetails/PerfectCandidateDetails';
 
-function GigItem({ name, email, phone, address, city ,jobId,seekerId,providerId}) {
+
+function GigItem({ name, email, phone, address, city, jobId, seekerId, providerId }) {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(jobId,seekerId,providerId)
 
   const openDetails = () => {
     setIsOpen(true);
@@ -25,10 +25,15 @@ function GigItem({ name, email, phone, address, city ,jobId,seekerId,providerId}
             <h2 className="text-4xl font-semibold text-gray-800">{name}</h2>
           </div>
 
-          {/* Email Section */}
+          {/* Chat Button Section */}
           <div className="flex items-center gap-3 text-2xl font-semibold text-orange-600">
-            <BiLogoGmail className="text-5xl text-red-800" />
-            <div>{email}</div>
+            <BiChat className="text-5xl text-blue-600" />
+            <Link 
+              to={`/providerchat/${seekerId}`} 
+              className="text-xl text-blue-600 font-medium hover:underline"
+            >
+              Chat Now
+            </Link>
           </div>
 
           {/* More Details Button */}

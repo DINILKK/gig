@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import JobDetailsCardDisplay from '../../../components/DetailCard/JobDetailCardDisplay';
 
 
-function ApprovedJobCard({ title, company, location,pay,shift,time,role,description }) {
+function ApprovedJobCard({ title, company, location,pay,shift,time,role,description ,userId}) {
   const [isOpen, setIsOpen] = useState(false); 
 
   // Open the job details modal
@@ -72,9 +72,11 @@ function ApprovedJobCard({ title, company, location,pay,shift,time,role,descript
           shift : shift,
           time:time,
           contact: 'contact@company.com',
-          description : description // Add actual contact info
+          description : description ,
+          seekerId:userId// Add actual contact info
         }}
         onClose={closeDetails}
+        showChat={true}
       />
     )}
     </>

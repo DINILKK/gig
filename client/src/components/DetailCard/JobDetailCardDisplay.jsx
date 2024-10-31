@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 
-const JobDetailsCardDisplay = ({ job, onClose, onCancel, showCancel, isChecked, setIsChecked, loading }) => {
+const JobDetailsCardDisplay = ({ job, onClose, onCancel, showCancel, isChecked, setIsChecked, loading, showChat }) => {
+  const navigate = useNavigate();
+  
   if (!job) return null;
 
   // Function to handle checkbox change
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
     console.log('Checkbox is now:', !isChecked); // Log checkbox state
+  };
+
+  // Function to start chat
+  const startChat = () => {
+    navigate(`/seekerchat/${job.seekerId}`); // Adjust as needed for route and ID structure
   };
 
   // Create a portal for the modal
@@ -18,9 +26,11 @@ const JobDetailsCardDisplay = ({ job, onClose, onCancel, showCancel, isChecked, 
         <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-800" onClick={onClose}>
           &times;
         </button>
+        
         {/* Job Title */}
         <h2 className="text-2xl font-semibold mb-4">{job.title}</h2>
-        {/* Job Description */}
+        
+        {/* Job Details */}
         <p className="mb-2 text-gray-700"><strong>Role: </strong>{job.role}</p>
         <p className="mb-2"><strong>Location:</strong> {job.location}</p>
         <p className="mb-2"><strong>Shift:</strong> {job.shift}</p>
@@ -29,11 +39,6 @@ const JobDetailsCardDisplay = ({ job, onClose, onCancel, showCancel, isChecked, 
         <p className="mb-2"><strong>Contact:</strong> {job.contact}</p>
         <p className='mb-2'><strong>Job Description:</strong></p>
         <p className='mb-4'>{job.description}</p>
-        
-        {/* Apply Button
-        <button className="w-full py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-          Apply
-        </button> */}
         
         {/* Conditionally render the Cancel Application Button */}
         {showCancel && (
@@ -55,6 +60,16 @@ const JobDetailsCardDisplay = ({ job, onClose, onCancel, showCancel, isChecked, 
               {loading ? 'Cancelling...' : 'Cancel Application'}
             </button>
           </>
+        )}
+        
+        {/* Conditionally render the Chat Now Button */}
+        {showChat && (
+          <button 
+            onClick={startChat} 
+            className="w-full mt-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+          >
+            Chat Now
+          </button>
         )}
       </div>
     </div>
