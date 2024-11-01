@@ -66,6 +66,7 @@ router.get('/history', async (req, res) => {
   const { userid } = req.query;
 
   try {
+    // console.log('hi')
     // Fetch application history for the user with statuses "done" and "rejected"
     const history = await Applicationdb.find({
       seekerId: userid,
