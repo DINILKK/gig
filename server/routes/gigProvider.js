@@ -191,4 +191,104 @@ router.post('/rejected', async (req, res) => {
 });
 
 
+router.get('/perfectedcandidates', async (req, res) => {
+  const providerId = req.query.userId || req.params.userId; // Adjust based on how providerId is passed
+  console.log(providerId);
+  
+  if (!providerId) {
+    return res.status(400).json({ error: "Provider ID is required" });
+  }
+
+  try {
+    // Find all jobs posted by the provider
+    const jobs = await JobCollection.find({ providerId: providerId });
+    console.log(jobs);
+    
+    // Map over each job to find corresponding applications and format the data
+    const data = await Promise.all(
+      jobs.map(async (job) => {
+        // Find applications corresponding to each job
+        const applications = await Applicationdb.find({ jobId: job.jobId });
+
+        // Filter applications to include only those with status "pending"
+        const pendingApplications = applications.filter(app => app.status === "approved");
+
+        return {
+          title: job.title,                          // Job title from JobCollection
+          applicants: pendingApplications.length,     // Count of pending applications for this job
+          // status: pendingApplications.map(app => app.status), // Status of each pending application
+          jobId:job.jobId
+        };
+      })
+    );
+
+    // Filter out jobs with no pending applications
+    // const filteredData = data.filter(item => item.applicants > 0);
+
+    // console.log(filteredData); // Log the filtered data
+    // Send response with formatted data
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Error fetching gigs:", error);
+    res.status(500).json({ error: "Failed to retrieve gigs" });
+  }
+});
+
+router.get('/perfectCandidateDetails', async (req, res) => {
+  const { userId: providerId, jobId } = req.query; // Use req.query for query parameters
+  
+  if (!providerId || !jobId) {
+    return res.status(400).json({ error: "Provider ID and Job ID are required" });
+  }
+  
+  try {
+    // Find applications with the specified providerId, jobId, and status "pending"
+    const applications = await Applicationdb.find({ providerId, jobId, status: "approved" });
+
+    // Map each application to fetch seeker details
+    const data = await Promise.all(
+      applications.map(async (application) => {
+        const seeker = await SeekerCollection.findById(application.seekerId);
+        
+        return {
+          name: seeker.name,
+          email: seeker.email,
+          phone: seeker.phone,
+          address: seeker.address,
+          city: seeker.city,
+          jobId: application.jobId,
+          seekerId: application.seekerId,
+          providerId: application.providerId
+        };
+      })
+    );
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Failed to retrieve personal details" });
+  }
+});
+
+router.post('/done', async (req, res) => {
+  const { status, jobId, seekerId, providerId } = req.body;
+  console.log({ status, jobId, seekerId, providerId })
+  try {
+    const response = await Applicationdb.findOneAndUpdate(
+      { seekerId: seekerId, jobId: jobId, providerId: providerId }, // Find criteria
+      { status: status }, // Update fields
+      { new: true } // Return the updated document
+    );
+
+    if (!response) {
+      return res.status(404).json({ message: 'Application not found' });
+    }
+
+    res.status(200).json({ message: 'Application updated successfully', data: response });
+  } catch (error) {
+    console.error('Error updating application:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 module.exports = router;
