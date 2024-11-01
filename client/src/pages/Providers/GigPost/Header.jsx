@@ -10,6 +10,7 @@ function Header() {
         <div className="flex gap-10 items-center text-xl leading-tight text-white">
           <Link to={`/gigpost/${userId}`} className="z-10 pt-0 pb-0.5 font-semibold text-teal-500">Post a gig !</Link>
           <Link to={`/yourgig/${userId}`} className="z-10 pt-0 pb-0.5 font-medium">Your gigs</Link>
+          <Link to={`/perfectcandidates/${userId}`} className="z-10 pt-0 pb-0.5 font-medium ">Your Perfect Candidates</Link>
         </div>
         <Link to={`#`} title="Profile" className="text-white text-l">
           <FaUserCircle className="w-8 h-8" />

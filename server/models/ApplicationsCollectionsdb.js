@@ -4,7 +4,6 @@ const applicationSchema = new mongoose.Schema({
   jobId: {
     type: String,
     required: true,
-    unique:true,
   },
   seekerId: {
     type: String,
@@ -16,7 +15,7 @@ const applicationSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['pending', 'accepted', 'rejected', 'done'],  
+    enum: ['pending', 'approved', 'rejected', 'done'],  
     default: 'pending',
   },
   appliedDate: {

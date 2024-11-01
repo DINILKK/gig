@@ -19,8 +19,11 @@ import axios from 'axios'
 import ProfileHeader from './pages/seeker/gigUserProfile/ProfileComponents/ProfileHeader';
 import ProfilePage from './pages/seeker/gigUserProfile/ProfilePage';
 import GigConfirmation from './pages/seeker/GigConfirmations/GigConfirmation.tsx';
-
-
+import PersonDetails from './pages/Providers/YourGig/PersonDetails/GigList.jsx'
+import YourPerfectCandidates from './pages/Providers/yourPerfectCandidates/GigList.jsx'
+import PerfectCandidatesDetails from './pages/Providers/yourPerfectCandidates/PersonDetails/GigList.jsx'
+import ProviderChat from './pages/Providers/Chat/ChatPage.jsx'
+import SeekerChat from './pages/seeker/chat/ChatPage.jsx'
 
 axios.defaults.baseURL = process.env.AXIOS_URL || 'http://localhost:5001';
 axios.defaults.withCredentials = true;
@@ -42,6 +45,11 @@ function App() {
           <Route path='/providerRegistration' element={<ProviderRegistration/>}/>
           <Route path='/seekerprofile/:id' element={<SeekerProfile/>}/>
           <Route path='/yourgig/:id' element={<GigList/>}/>
+          <Route path='/yourgig/:id/:jobId' element={<PersonDetails/>}/>
+          <Route path='/perfectcandidates/:id' element={<YourPerfectCandidates/>}/>
+          <Route path='/perfectcandidates/:id/:jobId' element={<PerfectCandidatesDetails/>}/>
+          <Route path='/providerchat/:id' element={<ProviderChat/>}/>
+          <Route path='/seekerchat/:id' element={<ProviderChat/>}/>
         </Routes>
       </BrowserRouter>
     </div>

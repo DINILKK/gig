@@ -6,6 +6,7 @@ import ApprovedJobCard from './ApprovedJobCard';
 import axios from 'axios';
 
 function GigTracker() {
+  const userId = localStorage.getItem('userId'); 
   const [pendingJobs, setPendingJobs] = useState([]);
   const [approvedJobs, setApprovedJobs] = useState([]);
 
@@ -13,7 +14,6 @@ function GigTracker() {
     // Function to fetch pending and approved jobs from the API
     const fetchData = async () => {
       try {
-        const userId = localStorage.getItem('userId'); 
         if (userId) {
           const response = await axios.get(`/api/status`, { params: { userid: userId } });
           
@@ -69,7 +69,7 @@ function GigTracker() {
                 iconSrc="https://cdn.builder.io/api/v1/image/assets/TEMP/6cc4294013bfc02cebabadb6757b1f61ba87eedd5a510593bbb9635ebab02aa0?apiKey=b1b7c46b698f4e75aa8360aa33741bab"
               />
               {approvedJobs.map((job) => (
-                <ApprovedJobCard key={job.id} {...job} />
+                <ApprovedJobCard key={job.id} {...job} userId={userId} />
               ))}
             </div>
           </div>
